@@ -9,12 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/* Test constructor success
- * Test runServer, verify:
- * 		- ArrayList serverThreads created
- * 		- mainServerSocket accepts connections
- * 		- size of serverThreads increase with new connections
- * 		- new serverThread started
+/* 
  * Test distributeObjectToAllServerThreads success:
  * 		- That all objects in serverThreads receive objects from the server
  * Test distributeObjectToAllServerThreads missing serverThread from serverThreads:
@@ -25,38 +20,57 @@ import org.junit.jupiter.api.Test;
  * 		- That stopServer becomes true
  * */
 class ServerTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void Server_ObjectCreated_ServerSocketExists() {
+		Server server = new Server();
+		assertEquals(4848, server.mainServerSocket.getLocalPort());
 	}
+	
+	@Test
+	void runServer_ServerRunning_ServerAcceptsConnections() {
+		Server server = new Server();
+		server.runServer();
+		
+		//Assert that ArrayList serverThreads is created
+		//Create client, connect it
+		//Assert serverThreads size is 1
+		//Create another client, connect it
+		//Assert serverThreads size is 2
+		
+	}
+
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@BeforeAll
+//	static void setUpBeforeClass() throws Exception {
+//	}
+//
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@AfterAll
+//	static void tearDownAfterClass() throws Exception {
+//	}
+//
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@BeforeEach
+//	void setUp() throws Exception {
+//	}
+//
+//	/**
+//	 * @throws java.lang.Exception
+//	 */
+//	@AfterEach
+//	void tearDown() throws Exception {
+//	}
+//
+//	@Test
+//	void test() {
+//		fail("Not yet implemented");
+//	}
 
 }
