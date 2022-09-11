@@ -1,0 +1,2 @@
+How to add git credentials on Windows for Git bash, also enabling different credentials for different repositories:
+https://stackoverflow.com/a/54096357
