@@ -9,10 +9,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * @author Alexander
- *
- */ 
+/* Test constructor success
+ * Test runServer, verify:
+ * 		- ArrayList serverThreads created
+ * 		- mainServerSocket accepts connections
+ * 		- size of serverThreads increase with new connections
+ * 		- new serverThread started
+ * Test distributeObjectToAllServerThreads success:
+ * 		- That all objects in serverThreads receive objects from the server
+ * Test distributeObjectToAllServerThreads missing serverThread from serverThreads:
+ * 		- That a previously removed serverThread generates an exception and the object is removed
+ * Test closeServerSocket:
+ * 		- That mainServerSocket is closed
+ * Test stopServer
+ * 		- That stopServer becomes true
+ * */
 class ServerTest {
 
 	/**
