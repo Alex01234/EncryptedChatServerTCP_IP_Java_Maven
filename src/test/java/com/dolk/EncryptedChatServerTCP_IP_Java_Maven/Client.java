@@ -3,6 +3,8 @@ package com.dolk.EncryptedChatServerTCP_IP_Java_Maven;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -76,15 +78,25 @@ public class Client {
 		}
 	}
 	
-	void sendMessage(String messageToSend) {
-		
+	void sendMessage(String message) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, IOException {
+		Serializable object = message;
+
+		IvParameterSpec iv = new IvParameterSpec(firstPassword.getBytes("UTF-8"));
+		SecretKeySpec skeySpec = new SecretKeySpec(secondPassword.getBytes("UTF-8"),
+				"AES");
+		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+		cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+
+		SealedObject sealedObject = new SealedObject(object, cipher);
+		outStream.writeObject(sealedObject);
 	}
 	
-	void disconnect() {
-		
+	void disconnect() throws IOException {
+		receivingThread.stop();
+		socket.close();
 	}
 	
 	void shutDownClient() {
-		
+		running.set(false);
 	}
 }

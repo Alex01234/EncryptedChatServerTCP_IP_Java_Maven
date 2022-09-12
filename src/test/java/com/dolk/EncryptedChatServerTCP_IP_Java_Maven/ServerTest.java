@@ -21,23 +21,33 @@ import org.junit.jupiter.api.Test;
  * */
 class ServerTest {
 	
-	@Test
-	void Server_ObjectCreated_ServerSocketExists() {
-		Server server = new Server();
-		assertEquals(4848, server.mainServerSocket.getLocalPort());
-	}
+//	@Test
+//	void Server_ObjectCreated_ServerSocketExists() {
+//		Server server = new Server();
+//		assertEquals(4850, server.mainServerSocket.getLocalPort());
+//		server.closeServerSocket();
+//		server.stopServer();
+//	}
 	
 	@Test
 	void runServer_ServerRunning_ServerAcceptsConnections() {
-		Server server = new Server();
-		server.runServer();
+		final Server server = new Server();
+		
+		Thread t = new Thread() {
+			public void run() {
+				server.runServer();
+			}
+		};
+		t.start();
 		
 		//Assert that ArrayList serverThreads is created
+		assertEquals(true, server.serverThreads.isEmpty());
 		//Create client, connect it
 		//Assert serverThreads size is 1
 		//Create another client, connect it
 		//Assert serverThreads size is 2
-		
+		server.closeServerSocket();
+		server.stopServer();
 	}
 
 //	/**
