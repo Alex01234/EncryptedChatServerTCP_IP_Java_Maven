@@ -40,8 +40,6 @@ class ServerTest {
 		};
 		t.start();
 		
-		//Assert that ArrayList serverThreads is created
-		assertEquals(true, server.serverThreads.isEmpty());
 		//Create client, connect it
 		//Assert serverThreads size is 1
 		//Create another client, connect it
