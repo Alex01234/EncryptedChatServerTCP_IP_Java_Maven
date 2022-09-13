@@ -92,7 +92,7 @@ public class Client {
 	}
 	
 	void disconnect() throws IOException {
-		receivingThread.stop();
+		//receivingThread.stop();
 		socket.close();
 	}
 	

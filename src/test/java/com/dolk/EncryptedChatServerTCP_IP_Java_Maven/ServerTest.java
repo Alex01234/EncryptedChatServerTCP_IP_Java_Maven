@@ -3,6 +3,15 @@ package com.dolk.EncryptedChatServerTCP_IP_Java_Maven;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
+
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,22 +39,54 @@ class ServerTest {
 //	}
 	
 	@Test
-	void runServer_ServerRunning_ServerAcceptsConnections() {
+	void runServer_ServerRunning_ServerAcceptsConnections() throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, InterruptedException {
 		final Server server = new Server();
 		
-		Thread t = new Thread() {
+		Thread s_t = new Thread() {
 			public void run() {
 				server.runServer();
 			}
 		};
-		t.start();
+		s_t.start();
 		
-		//Create client, connect it
-		//Assert serverThreads size is 1
-		//Create another client, connect it
-		//Assert serverThreads size is 2
+
+		final Client client1 = new Client("localhost", 4848, "0JZGv0hwh7PiU548", "95FdIBeP46LyIo2k");
+		Thread c_t1 = new Thread() {
+			public void run() {
+				try {
+					client1.connectClient();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		c_t1.start();
+
+		final Client client2 = new Client("localhost", 4848, "0JZGv0hwh7PiU548", "95FdIBeP46LyIo2k");
+		Thread c_t2 = new Thread() {
+			public void run() {
+				try {
+					client2.connectClient();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		c_t2.start();
+		
+		//client1.sendMessage("Hello");
+		TimeUnit.SECONDS.sleep(1);
+		//System.out.println(client2.receivedMessage);
+		//System.out.println(server.serverThreads.size());
+		
+		assertEquals(2, server.serverThreads.size());
+		
 		server.closeServerSocket();
 		server.stopServer();
+		client1.disconnect();
+		client1.shutDownClient();
+		client2.disconnect();
+		client2.shutDownClient();
 	}
 
 //	/**

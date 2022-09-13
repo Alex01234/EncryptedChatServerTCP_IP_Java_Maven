@@ -16,7 +16,7 @@ public class Server {
 	
 	public Server() {
 		try {
-			this.mainServerSocket = new ServerSocket(4850);
+			this.mainServerSocket = new ServerSocket(4848);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
