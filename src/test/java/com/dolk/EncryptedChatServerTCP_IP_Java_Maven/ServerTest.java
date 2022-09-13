@@ -30,18 +30,25 @@ import org.junit.jupiter.api.Test;
  * */
 class ServerTest {
 	
-//	@Test
-//	void Server_ObjectCreated_ServerSocketExists() {
-//		Server server = new Server();
-//		assertEquals(4850, server.mainServerSocket.getLocalPort());
-//		server.closeServerSocket();
-//		server.stopServer();
-//	}
+	@Test
+	void Server_ObjectCreated_ServerSocketExists() {
+		final Server server = new Server();
+		Thread s_t = new Thread() {
+			public void run() {
+				server.runServer();
+			}
+		};
+		s_t.start();
+		
+		assertEquals(4848, server.mainServerSocket.getLocalPort());
+		
+		server.closeServerSocket();
+		server.stopServer();
+	}
 	
 	@Test
 	void runServer_ServerRunning_ServerAcceptsConnections() throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, InterruptedException {
 		final Server server = new Server();
-		
 		Thread s_t = new Thread() {
 			public void run() {
 				server.runServer();
