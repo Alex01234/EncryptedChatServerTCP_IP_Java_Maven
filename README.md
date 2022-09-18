@@ -4,7 +4,7 @@ The chat server is a Java program, which accepts connections from chat clients u
 
 ## Testing and test coverage 
 Unit tests have been written using [JUnit 5](https://junit.org/junit5/). The tests cover the class Server by 93% and the class ServerThread by 100%. 
-![Image showing test coverage of the project.](https://github.com/Alex01234/EncryptedChatClientTCP_IP_Java_Maven/blob/master/EncryptedChatClientTCP_IP_Java_Maven_test_coverage.PNG?raw=true)
+![Image showing test coverage of the project.](https://github.com/Alex01234/EncryptedChatServerTCP_IP_Java_Maven/blob/master/EncryptedChatServer_test_coverage.PNG?raw=true)
 
 ## Technicalities
 The application has been built using Maven.
