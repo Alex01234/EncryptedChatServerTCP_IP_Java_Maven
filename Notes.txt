@@ -1,2 +1,4 @@
 How to add git credentials on Windows for Git bash, also enabling different credentials for different repositories:
 https://stackoverflow.com/a/54096357
+
+git push https://YOUR_GIT_USERNAME@github.com/YOUR_GIT_USERNAME/yourGitFileName.git
